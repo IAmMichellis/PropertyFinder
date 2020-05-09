@@ -12,21 +12,7 @@ import {
 } from 'react-native';
 
 function urlForQueryAndPage(key, value, pageNumber) {
-  const data = {
-      country: 'uk',
-      pretty: '1',
-      encoding: 'json',
-      listing_type: 'buy',
-      action: 'search_listings',
-      page: pageNumber,
-  };
-  data[key] = value;
-
-  const querystring = Object.keys(data)
-    .map(key => key + '=' + encodeURIComponent(data[key]))
-    .join('&');
-
-  return 'http://dummy.restapiexample.com/api/v1/employees';
+  return 'https://reactnative.dev/movies.json';
 }
 
 type Props = {};
@@ -37,6 +23,7 @@ export default class SearchPage extends Component<Props> {
     this.state = {
       searchString: 'london',
       isLoading: false,
+      message: '',
     };
   }
 
@@ -44,16 +31,30 @@ export default class SearchPage extends Component<Props> {
     this.setState({ searchString: event.nativeEvent.text });
   };
   
+  _handleResponse = (response) => {
+    this.setState({ isLoading: false , message: '' });
+    console.log('Properties/movies found: ' + response.movies);
+  };  
+
   _executeQuery = (query) => {
     this.setState({ isLoading: true });
+
+    fetch(query)
+      .then(response => response.json())
+      .then(json => this._handleResponse(json))
+      .catch(error =>
+        this.setState({
+          isLoading: false,
+          message: 'Something bad happened ' + error
+      }));
+
   };
   
   _onSearchPressed = () => {
     const query = urlForQueryAndPage('place_name', this.state.searchString, 1);
-    console.log(query);
     this._executeQuery(query);
   };
-
+  
   
   render() {
     const spinner = this.state.isLoading ? <ActivityIndicator size='large'/> : null
@@ -81,6 +82,7 @@ export default class SearchPage extends Component<Props> {
         </View>
         <Image source={require('./Resources/house.png')} style={styles.image}/>
         {spinner}
+        <Text style={styles.description}>{this.state.message}</Text>
       </View>
     );
   }
@@ -118,5 +120,4 @@ const styles = StyleSheet.create({
     width: 217,
     height: 138,
   },
-  
 });
