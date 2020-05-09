@@ -27,7 +27,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 const App: () => React$Node = () => {
-  return <Text style={styles.description}>Search for houses to buy!</Text>;
+  return <Text style={styles.description}>App root: I don't want to see this.</Text>;
 };
 
 const styles = StyleSheet.create({

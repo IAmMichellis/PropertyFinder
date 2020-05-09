@@ -3,9 +3,9 @@
  */
 
 import { Navigation } from "react-native-navigation";
-import App from './App';
+import SearchPage from './SearchPage';
 
-Navigation.registerComponent('com.myApp.WelcomeScreen', () => App);
+Navigation.registerComponent('com.PropertyFinder.SearchPage', () => SearchPage);
 Navigation.events().registerAppLaunchedListener(() => {
   Navigation.setRoot({
     root: {
@@ -13,7 +13,7 @@ Navigation.events().registerAppLaunchedListener(() => {
         children: [
           {
             component: {
-              name: 'com.myApp.WelcomeScreen',
+              name: 'com.PropertyFinder.SearchPage',
             },
           },
         ],
