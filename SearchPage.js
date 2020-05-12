@@ -102,18 +102,6 @@ export default class SearchPage extends Component<Props> {
   }
 }
 
-SearchPage.options = {
-  topBar: {
-    title: {
-      text: 'Search',
-      color: 'white'
-    },
-    background: {
-      color: '#4d089a'
-    }
-  }
-}
-
 const styles = StyleSheet.create({
   description: {
     marginBottom: 20,
