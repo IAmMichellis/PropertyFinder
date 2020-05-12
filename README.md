@@ -5,5 +5,3 @@ Nothing interesting... following this tutorial https://www.raywenderlich.com/247
 
 Note: had too many problems integrating the navigation library, and apparently it looks like garbage anyway, so used React Native Navigation instead (https://wix.github.io/react-native-navigation/docs/before-you-start/)
 
-
-```
