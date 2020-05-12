@@ -1,28 +1,38 @@
 'use strict';
 
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   StyleSheet,
-  Text,
+  Image,
   View,
+  TouchableHighlight,
+  FlatList,
+  Text,
 } from 'react-native';
 
 type Props = {};
 export default class SearchResultsPage extends Component<Props> {
+  _keyExtractor = (item, index) => index.toString();
+
+  _renderItem = ({item}) => {
+    return (
+      <TouchableHighlight
+        underlayColor='#dddddd'>
+        <View>
+          <Text>{item.title}</Text>
+        </View>
+      </TouchableHighlight>
+    );
+    
+  };
+
   render() {
     return (
-    <View style={[styles.root]}>
-      <Text>Search Results</Text>
-    </View>
+      <FlatList
+        data={this.props.movies}
+        keyExtractor={this._keyExtractor}
+        renderItem={this._renderItem}
+      />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'whitesmoke'
-  }
-});

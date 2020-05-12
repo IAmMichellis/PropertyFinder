@@ -36,9 +36,15 @@ export default class SearchPage extends Component<Props> {
   _handleResponse = (response) => {
     this.setState({ isLoading: false , message: '' });
     console.log('Properties/movies found: ' + response.movies);
+    // this.props.navigation.navigate(
+      // 'Results', {listings: response.listings});
+    
     Navigation.push( this.props.componentId, {
       component: {
         name: 'com.PropertyFinder.SearchResultsPage',
+        passProps: {
+          movies: response.movies
+        },
         options: {
           topBar: {
             title: {
