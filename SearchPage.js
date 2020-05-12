@@ -10,6 +10,8 @@ import {
   ActivityIndicator,
   Image,
 } from 'react-native';
+import { Navigation } from "react-native-navigation";
+
 
 function urlForQueryAndPage(key, value, pageNumber) {
   return 'https://reactnative.dev/movies.json';
@@ -34,6 +36,18 @@ export default class SearchPage extends Component<Props> {
   _handleResponse = (response) => {
     this.setState({ isLoading: false , message: '' });
     console.log('Properties/movies found: ' + response.movies);
+    Navigation.push( this.props.componentId, {
+      component: {
+        name: 'com.PropertyFinder.SearchResultsPage',
+        options: {
+          topBar: {
+            title: {
+              text: 'Results'
+            }
+          }
+        },
+      }
+    })
   };  
 
   _executeQuery = (query) => {
@@ -85,6 +99,18 @@ export default class SearchPage extends Component<Props> {
         <Text style={styles.description}>{this.state.message}</Text>
       </View>
     );
+  }
+}
+
+SearchPage.options = {
+  topBar: {
+    title: {
+      text: 'Search',
+      color: 'white'
+    },
+    background: {
+      color: '#4d089a'
+    }
   }
 }
 
